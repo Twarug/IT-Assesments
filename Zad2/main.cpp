@@ -2,7 +2,6 @@
 #include <ctime>
 #include <thread>
 #include <chrono>
-#include <numeric>
 
 
 void Robot();
@@ -68,6 +67,7 @@ int main()
         }
         
         system("pause");
+        system("cls");
     }
 }
 
@@ -189,9 +189,88 @@ void Totolotek()
     }
 }
 
-void Cisnienie()
+int SelectUnit(const char* message);
+
+void Cisnienie() 
 {
+    std::cout << "Podaj cisnienie: ";
+
+    auto selectUnit = [](const char* message) -> int {
+        while (true)
+        {
+            std::cout << "\n=======================\n";
+            std::cout << "1) Pa\n";
+            std::cout << "2) bar\n";
+            std::cout << "3) tor\n";
+            std::cout << "4) psi\n";
+            std::cout << "=======================\n";
+            std::cout << message;
+
+            char input;
+            std::cin >> input;
+            std::cout << "=======================\n";
+
+            if(input >= '0' && input <= '4')
+                return input - '0';
+        }
+    };
     
+    double inPressure;
+    std::cin >> inPressure;
+    double outPressure = inPressure;
+    
+    double multiplier = 1.0;
+
+    const char* inUnit = nullptr;
+    switch (selectUnit("Wybierz jednostke danych wejsciowych: "))
+    {
+        case 1:
+            inUnit = "Pa";
+            multiplier = 1.0;
+            break;
+        case 2:
+            inUnit = "bar";
+            multiplier = 100000;
+            break;
+        case 3:
+            inUnit = "tor";
+            multiplier = 133.322;
+            break;
+        case 4:
+            inUnit = "psi";
+            multiplier = 6894.8;
+            break;
+        default:
+            break;
+    }
+    outPressure *= multiplier;
+
+
+    const char* outUnit = nullptr;
+    switch (selectUnit("Wybierz jednostke docelowa: "))
+    {
+        case 1:
+            outUnit = "Pa";
+            multiplier = 1.0;
+            break;
+        case 2:
+            outUnit = "bar";
+            multiplier = .00001;
+            break;
+        case 3:
+            outUnit = "tor";
+            multiplier = .0075;
+            break;
+        case 4:
+            outUnit = "psi";
+            multiplier = .000145038;
+            break;
+        default:
+            break;
+    }
+    outPressure *= multiplier;
+
+    std::cout << inPressure << inUnit << " = " << outPressure << outUnit << '\n';
 }
 
 
