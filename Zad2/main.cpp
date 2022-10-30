@@ -159,34 +159,29 @@ void Totolotek()
 
     std::srand(static_cast<unsigned int>(std::time(nullptr)));
 
-    while (true)
+    int nums[6];
+    std::cout << "Wylosowane liczby: ";
+
+    for(int i = 0; i < 6; i++)
     {
-        int nums[6];
-        std::cout << "Nowe liczby: ";
+        int num = std::rand() % 49 + 1;
 
-        for(int i = 0; i < 6; i++)
-        {
-            int num = std::rand() % 49 + 1;
+        for(int j = 0; j < i; j++)
+            if(nums[j] == num)
+            {
+                i--;
+                goto end;
+            }
 
-            bool skip = false;
-            for(int j = 0; j < i; j++)
-                if(nums[j] == num)
-                {
-                    i--;
-                    skip = true;
-                    break;
-                }
-
-            if(skip)
-                continue;
-
-            nums[i] = num;
-            
-            std::cout << num << ' ';
-        }
-        std::cout << '\n';
+        nums[i] = num;
+        
+        std::cout << num << ' ';
         std::this_thread::sleep_for(1s);
+
+        end:;
     }
+    
+    std::cout << '\n';
 }
 
 int SelectUnit(const char* message);
