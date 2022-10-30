@@ -10,7 +10,7 @@ int main()
     std::cin >> eCount;
     
     std::cout << "Podaj pary wierzcholkow: \n";
-    bool* matrix = new bool[vCount * vCount]{}; 
+    bool* matrix = new bool[static_cast<uint64_t>(vCount * vCount)]{}; 
     
     for(int i = 0; i < eCount; i++)
     {
