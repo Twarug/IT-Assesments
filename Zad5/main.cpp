@@ -13,11 +13,11 @@ std::string oct2bin(std::string oct);
 
 int main()
 {
-    std::cout << "44(10) = "    << dec2bin("44")     << "(2)\n";
-    std::cout << "44(10) = "    << dec2hex("44")     << "(16)\n";
-    std::cout << "101(2) = "    << bin2dec("101")      << "(10)\n";
-    std::cout << "101100(2) = " << bin2hex("101100") << "(16)\n";
-    std::cout << "115(8) = "    << oct2bin("115")    << "(2)\n";
+    std::cout << "dec2bin: " << "44(10) = "    << dec2bin("44")     << "(2)\n";
+    std::cout << "dec2hex: " << "44(10) = "    << dec2hex("44")     << "(16)\n";
+    std::cout << "bin2dec: " << "101(2) = "    << bin2dec("101")      << "(10)\n";
+    std::cout << "bin2hex: " << "101100(2) = " << bin2hex("101100") << "(16)\n";
+    std::cout << "oct2bin: " << "115(8) = "    << oct2bin("115")    << "(2)\n";
 
     return 0;
 }
