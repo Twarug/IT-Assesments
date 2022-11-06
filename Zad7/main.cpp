@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <chrono>
 
 std::string SzyfrCezara(std::string in, int offset);
@@ -35,30 +36,54 @@ int main()
                 return 0;
         }
         
-        std::cout << "\nPodaj tekst do przetworzenia: ";
+        std::cout << "\nPodaj plik do przetworzenia: ";
         
-        std::string in;
+        std::string path;
         std::cin.ignore();
-        std::getline(std::cin, in);
+        std::getline(std::cin, path);
+        
+        std::fstream file(path);
+        std::string text((std::istreambuf_iterator(file)), std::istreambuf_iterator<char>());
 
-
-        std::cout << "\nEfekt:\n";
         switch (input)
         {
             case '1':
-                std::cout << SzyfrCezara(in, 5);
+            {
+                int offset;
+                std::cout << "Podaj przesuniecie: ";
+                std::cin >> offset;
+                    
+                text = SzyfrCezara(text, offset);
                 break;
-                
+            }
             case '2':
-                std::cout << DeszyfrCezara(in, 5);
+            {
+                int offset;
+                std::cout << "Podaj przesuniecie: ";
+                std::cin >> offset;
+
+                text = DeszyfrCezara(text, offset);
                 break;
-                
+            }
             case '3':
             case '4':
-                std::cout << SzyfrXOR(in, 126);
+            {
+                char mask;
+                std::cout << "Podaj maske: ";
+                std::cin >> mask;
+                
+                text = SzyfrXOR(text, mask);
                 break;
+            }
         }
-        std::cout << "\n\n";
+
+        file.seekg(0);
+        file << text;
+        file.close();
+        
+        std::cout << "Operacja zakonczona\n";
+
+        std::cout << "Efekt: " << text << '\n';
         
         std::cout << std::flush;
         system("pause");
