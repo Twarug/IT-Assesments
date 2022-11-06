@@ -114,15 +114,17 @@ void Robot()
 void Ciag()
 {
     int tab[100];
-    int a1, r;
+    int r;
     std::cout << "Podaj pierwszy element ciagu arytmetycznego oraz jego roznice: ";
-    std::cin >> a1 >> r;
-    
-    for(int n = 0; n < 100; n++)
+    std::cin >> tab[0] >> r;
+
+    std::cout << '\n' << tab[0];
+    for(int n = 1; n < 100; n++)
     {
-        tab[n] = a1 + r * n;
-        std::cout << tab[n] << ' ';
+        tab[n] = tab[n - 1] + r;
+        std::cout << ' ' << tab[n];
     }
+    std::cout << '\n';
 }
 
 void MoreLess()
@@ -214,58 +216,29 @@ void Cisnienie()
     std::cin >> inPressure;
     double outPressure = inPressure;
     
-    double multiplier = 1.0;
-
-    const char* inUnit = nullptr;
-    switch (selectUnit("Wybierz jednostke danych wejsciowych: "))
-    {
-        case 1:
-            inUnit = "Pa";
-            multiplier = 1.0;
-            break;
-        case 2:
-            inUnit = "bar";
-            multiplier = 100000;
-            break;
-        case 3:
-            inUnit = "tor";
-            multiplier = 133.322;
-            break;
-        case 4:
-            inUnit = "psi";
-            multiplier = 6894.8;
-            break;
-        default:
-            break;
-    }
-    outPressure *= multiplier;
-
-
     const char* outUnit = nullptr;
     switch (selectUnit("Wybierz jednostke docelowa: "))
     {
         case 1:
             outUnit = "Pa";
-            multiplier = 1.0;
             break;
         case 2:
             outUnit = "bar";
-            multiplier = .00001;
+            outPressure *= .00001;
             break;
         case 3:
             outUnit = "tor";
-            multiplier = .0075;
+            outPressure *= .0075;
             break;
         case 4:
             outUnit = "psi";
-            multiplier = .000145038;
+            outPressure *= .000145038;
             break;
         default:
             break;
     }
-    outPressure *= multiplier;
 
-    std::cout << inPressure << inUnit << " = " << outPressure << outUnit << '\n';
+    std::cout << inPressure << "Pa = " << outPressure << outUnit << '\n';
 }
 
 
