@@ -37,7 +37,7 @@ int main()
         }
         std::cout << "\n\n";
 
-        std::cout << "Suma liczb parzystych tego przedziału wynosi: " << sum;
+        std::cout << "Suma liczb parzystych tego przedzialu wynosi: " << sum;
         std::cout << '\n';
     }
     
@@ -77,11 +77,11 @@ int main()
             sum += num;
         }
         
-        int avg = sum / count;
+        float avg = (float)sum / count;
 
         std::cout << "Srednia wynosi: " << avg << '\n';
         
-        for(int i = 0; i < avg; i++)
+        for(int i = 0; i < (int)avg; i++)
             std::cout << "0 ";
         std::cout << '\n';
     }
